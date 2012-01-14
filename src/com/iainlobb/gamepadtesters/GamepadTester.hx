@@ -35,7 +35,7 @@ import nme.Lib;
 
 /**
  * ...
- * @author Adam Harte (adam@adamharte.com)
+ * @author Iain Lobb - iainlobb@googlemail.com
  */
 
 class GamepadTester extends Sprite

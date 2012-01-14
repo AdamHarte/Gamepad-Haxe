@@ -16,7 +16,6 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="..\..\..\Flash\libs\Gamepad" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -50,7 +49,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="flash" />
+    <option testMovieCommand="html5" />
   </options>
   <!-- Plugin storage -->
   <storage />

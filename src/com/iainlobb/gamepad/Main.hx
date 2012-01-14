@@ -37,6 +37,8 @@ class Main extends Sprite
 	{
 		testerContainer = new Sprite();
 		uiContainer = new Sprite();
+		uiContainer.x = 5;
+		uiContainer.y = 5;
 		addChild(testerContainer);
 		addChild(uiContainer);
 		
