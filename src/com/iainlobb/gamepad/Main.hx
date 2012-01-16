@@ -1,6 +1,7 @@
 package com.iainlobb.gamepad;
 
 import com.iainlobb.gamepadtesters.GamepadTester;
+import com.iainlobb.gamepadtesters.OnScreenJoystickTester;
 import com.iainlobb.gamepadtesters.PlatformGamepadTester;
 import nme.display.Sprite;
 import nme.events.Event;
@@ -21,6 +22,7 @@ class Main extends Sprite
 	private var uiContainer:Sprite;
 	private var gamepadTesterButton:Sprite;
 	private var platformGamepadTesterButton:Sprite;
+	private var onScreenJoystickTesterButton:Sprite;
 	
 	
 	public function new () 
@@ -35,6 +37,9 @@ class Main extends Sprite
 	
 	private function init():Void 
 	{
+		stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
+		stage.align = nme.display.StageAlign.TOP_LEFT;
+
 		testerContainer = new Sprite();
 		uiContainer = new Sprite();
 		uiContainer.x = 5;
@@ -44,11 +49,14 @@ class Main extends Sprite
 		
 		gamepadTesterButton = createButton('Top Down');
 		platformGamepadTesterButton = createButton('Platformer');
+		onScreenJoystickTesterButton = createButton('Screen Joystick');
 		gamepadTesterButton.addEventListener(MouseEvent.CLICK, onGamepadTesterClick);
 		platformGamepadTesterButton.addEventListener(MouseEvent.CLICK, onPlatformGamepadTesterClick);
+		onScreenJoystickTesterButton.addEventListener(MouseEvent.CLICK, onOnScreenJoystickTesterClick);
 		
-		showGamepadTest();
+		//showGamepadTest();
 		//showPlatformGameTest();
+		showOnscreenGameTest();
 	}
 	
 	private function createButton(labelText:String):Sprite 
@@ -64,7 +72,7 @@ class Main extends Sprite
 		
 		newButton.graphics.beginFill(0xDDDDDD, 0.8);
 		newButton.graphics.lineStyle(1, 0xEEEEEE, 0.6);
-		newButton.graphics.drawRect(0, 0, 60, 20);
+		newButton.graphics.drawRect(0, 0, 80, 20);
 		
 		var format:TextFormat = new TextFormat('Arial', 9, 0x999999);
 		format.align = TextFormatAlign.CENTER;
@@ -73,7 +81,7 @@ class Main extends Sprite
 		label.selectable = false;
 		label.mouseEnabled = false;
 		label.y = 2;
-		label.width = 60;
+		label.width = 80;
 		label.height = 16;
 		label.text = labelText;
 		newButton.addChild(label);
@@ -91,6 +99,12 @@ class Main extends Sprite
 	{
 		removeOldTest();
 		testerContainer.addChild(new PlatformGamepadTester());
+	}
+	
+	private function showOnscreenGameTest() 
+	{
+		removeOldTest();
+		testerContainer.addChild(new OnScreenJoystickTester());
 	}
 	
 	private function removeOldTest() 
@@ -117,6 +131,11 @@ class Main extends Sprite
 	private function onPlatformGamepadTesterClick(e:MouseEvent):Void 
 	{
 		showPlatformGameTest();
+	}
+	
+	private function onOnScreenJoystickTesterClick(e:MouseEvent):Void 
+	{
+		showOnscreenGameTest();
 	}
 	
 	
