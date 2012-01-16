@@ -35,28 +35,39 @@ class GamepadInput
 	/**
 	 * Is this input currently held down. 
 	 */
-	public var isDown (default, null):Bool;
+	public var isDown:Bool;
 	
 	/**
 	 * Was this input pressed this frame/step - use instead of listening to key down events.
 	 */
-	public var isPressed (default, null):Bool;
+	public var isPressed:Bool;
 	
 	/**
 	 * Was this input released this frame/step - use instead of listening to key up events.
 	 */
-	public var isReleased (default, null):Bool;
+	public var isReleased:Bool;
+
+	/**
+	 * Is this input controlled by an onscreen/virtual device
+	 */
+	public var isVirtual:Bool;
 	
 	/**
 	 * How long has the input been held down.
 	 */
-	public var downTicks (default, null):Int;
+	public var downTicks:Int;
 	
 	/**
 	 * How long since the input was last released.
 	 */
-	public var upTicks (default, null):Int;
-	
+	public var upTicks:Int;
+
+	/**
+	 * Amount of pression (joystick)
+	 */
+	public var pression:Float;
+
+		
 	private var mappedKeys:Array<Int>;
 	
 	
@@ -70,6 +81,7 @@ class GamepadInput
 		mappedKeys = (keyCode > -1) ? [keyCode] : [];
 		downTicks = -1;
 		upTicks = -1;
+		pression = 1;
 	}
 	
 	
@@ -89,6 +101,7 @@ class GamepadInput
 		{
 			mappedKeys.push(keyCode);
 		}
+		isVirtual = keyCode == 0;
 	}
 	
 	/**
@@ -127,7 +140,7 @@ class GamepadInput
 	 */
 	public function keyDown(keyCode:Int):Void
 	{
-		if (Lambda.has(mappedKeys, keyCode)) isDown = true;
+		if (!isVirtual && Lambda.has(mappedKeys, keyCode)) isDown = true;
 	}
 	
 	/**
@@ -135,7 +148,7 @@ class GamepadInput
 	 */
 	public function keyUp(keyCode:Int):Void
 	{
-		if (Lambda.has(mappedKeys, keyCode)) isDown = false;
+		if (!isVirtual && Lambda.has(mappedKeys, keyCode)) isDown = false;
 	}
 	
 }

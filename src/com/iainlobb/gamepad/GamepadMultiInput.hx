@@ -35,27 +35,27 @@ class GamepadMultiInput
 	/**
 	 * Is this input currently held down. 
 	 */
-	public var isDown (default, null):Bool;
+	public var isDown:Bool;
 	
 	/**
 	 * Was this input pressed this frame/step - use instead of listening to key down events.
 	 */
-	public var isPressed (default, null):Bool;
+	public var isPressed:Bool;
 	
 	/**
 	 * Was this input released this frame/step - use instead of listening to key up events.
 	 */
-	public var isReleased (default, null):Bool;
+	public var isReleased:Bool;
 	
 	/**
 	 * How long has the input been held down.
 	 */
-	public var downTicks (default, null):Int;
+	public var downTicks:Int;
 	
 	/**
 	 * How long since the input was last released.
 	 */
-	public var upTicks (default, null):Int;
+	public var upTicks:Int;
 	
 	private var isOr:Bool;
 	private var inputs:Array<GamepadInput>;

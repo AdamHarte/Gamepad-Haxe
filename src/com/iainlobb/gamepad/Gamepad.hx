@@ -257,6 +257,11 @@ class Gamepad
 	{
 		mapDirection(Keyboard.Z, Keyboard.S, Keyboard.Q, Keyboard.D, replaceExisting);
 	}
+
+	public function useVirtual():Void
+	{
+		mapDirection(0, 0, 0, 0, true);
+	}
 	
 	/// FIRE BUTTON PRESETS:
 	
@@ -339,17 +344,17 @@ class Gamepad
 	
 	
 	
-	private function updateState():Void
+	public function updateState():Void
 	{
 		for(gamepadMultiInput in multiInputs) gamepadMultiInput.update();
 		
 		if (up.isDown)
 		{
-			targetY = -1;
+			targetY = -up.pression;
 		}
 		else if (down.isDown)
 		{
-			targetY = 1;
+			targetY = down.pression;
 		}
 		else
 		{
@@ -358,11 +363,11 @@ class Gamepad
 		
 		if (left.isDown)
 		{
-			targetX = -1;
+			targetX = -left.pression;
 		}
 		else if (right.isDown)
 		{
-			targetX = 1;
+			targetX = right.pression;
 		}
 		else
 		{
