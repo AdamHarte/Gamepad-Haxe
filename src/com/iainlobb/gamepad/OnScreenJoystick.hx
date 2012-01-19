@@ -6,6 +6,8 @@ import nme.display.DisplayObject;
 import nme.display.Sprite;
 import nme.events.Event;
 import nme.events.MouseEvent;
+import nme.events.TouchEvent;
+import nme.geom.Point;
 
 /**
  * ...
@@ -19,7 +21,8 @@ class OnScreenJoystick extends Sprite
 	public var direction:Float;
 	public var amount:Float; 
 
-	var dragging:Bool;
+	var dragging:Int;
+	var dragPos:Point;
 	
 	/**
 	 * An on screen joystick (for touch devices)
@@ -53,9 +56,16 @@ class OnScreenJoystick extends Sprite
 		}
 		
 		addChild(thumb);
-		thumb.addEventListener(MouseEvent.MOUSE_DOWN, thumb_mouseDown);
+		
+		if (nme.ui.Multitouch.supportsTouchEvents)
+		{
+			nme.ui.Multitouch.inputMode = nme.ui.MultitouchInputMode.TOUCH_POINT;
+			thumb.addEventListener(TouchEvent.TOUCH_BEGIN, thumb_touchBegin);
+		}
+		else thumb.addEventListener(MouseEvent.MOUSE_DOWN, thumb_mouseDown);
 
-		dragging = false;
+		dragging = -1;
+		dragPos = new Point(0, 0);
 		direction = 0;
 		amount = 0;
 		update();
@@ -63,6 +73,7 @@ class OnScreenJoystick extends Sprite
 
 	public function destroy():Void
 	{
+		thumb.removeEventListener(TouchEvent.TOUCH_BEGIN, thumb_touchBegin);
 		thumb.removeEventListener(MouseEvent.MOUSE_DOWN, thumb_mouseDown);
 		gamepad = null;
 		thumb = null;
@@ -76,10 +87,10 @@ class OnScreenJoystick extends Sprite
 	{
 		var prevAmount = amount;
 		var prevDirection = direction;
-		if (dragging)
+		if (dragging >= 0)
 		{
-			var dx = mouseX;
-			var dy = mouseY;
+			var dx = dragPos.x;
+			var dy = dragPos.y;
 			var d = Math.sqrt(dx * dx + dy * dy);
 			if (d < 1) d = 0;
 			direction = Math.atan2(dy, dx);
@@ -101,7 +112,7 @@ class OnScreenJoystick extends Sprite
 	{
 		var py = Math.sin(direction) * amount;
 		var px = Math.cos(direction) * amount;
-		
+
 		if (gamepad.isCircle)
 		{
 			if (Math.abs(px) < 0.5) px = 0; 
@@ -129,17 +140,53 @@ class OnScreenJoystick extends Sprite
 		}
 	}
 
+	function thumb_touchBegin(e:TouchEvent) 
+	{
+		if (dragging >= 0) return;
+		dragging = e.touchPointID;
+		stage_touchMove(e);
+		stage.addEventListener(TouchEvent.TOUCH_END, stage_touchEnd);
+		stage.addEventListener(TouchEvent.TOUCH_MOVE, stage_touchMove);
+	}
+
+	function stage_touchMove(e:TouchEvent) 
+	{
+		if (e.touchPointID == dragging) 
+		{
+			dragPos.x = e.stageX;
+			dragPos.y = e.stageY;
+			dragPos = globalToLocal(dragPos);
+		}	
+	}
+
+	function stage_touchEnd(e:TouchEvent) 
+	{
+		if (e.touchPointID == dragging) 
+		{
+			dragging = -1;
+			stage.removeEventListener(TouchEvent.TOUCH_END, stage_touchEnd);
+			stage.removeEventListener(TouchEvent.TOUCH_MOVE, stage_touchMove);
+		}
+	}
 
 	function thumb_mouseDown(e)
 	{
+		dragging = 0;
 		stage.addEventListener(MouseEvent.MOUSE_UP, stage_mouseUp);
-		dragging = true;
+		stage.addEventListener(MouseEvent.MOUSE_MOVE, stage_mouseMove);
+	}
+
+	function stage_mouseMove(e) 
+	{
+		dragPos.x = mouseX;
+		dragPos.y = mouseY;
 	}
 
 	function stage_mouseUp(e)
 	{
-		stage.removeEventListener(MouseEvent.MOUSE_UP, stage_mouseUp);	
-		dragging = false;
+		dragging = -1;
+		stage.removeEventListener(MouseEvent.MOUSE_UP, stage_mouseUp);
+		stage.removeEventListener(MouseEvent.MOUSE_MOVE, stage_mouseMove);
 	}
 }
 

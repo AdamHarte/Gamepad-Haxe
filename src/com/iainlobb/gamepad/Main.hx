@@ -40,6 +40,10 @@ class Main extends Sprite
 		stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
 		stage.align = nme.display.StageAlign.TOP_LEFT;
 
+		#if mobile
+		scaleX = scaleY = stage.stageHeight / 400; 
+		#end
+
 		testerContainer = new Sprite();
 		uiContainer = new Sprite();
 		uiContainer.x = 5;
@@ -80,6 +84,7 @@ class Main extends Sprite
 		label.defaultTextFormat = format;
 		label.selectable = false;
 		label.mouseEnabled = false;
+		//Reflect.setField(label, "antiAliasType", "advanced");
 		label.y = 2;
 		label.width = 80;
 		label.height = 16;

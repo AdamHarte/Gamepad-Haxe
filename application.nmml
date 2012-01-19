@@ -6,7 +6,7 @@
 		
 	<!-- output -->
 	<window width="550" height="400" fps="60" orientation="landscape" resizable="true" />
-	<window width="800" height="480" fps="60" orientation="landscape" fullscreen="true" if="mobile" />
+	<window width="0" height="0" fps="60" orientation="landscape" fullscreen="true" if="mobile" />
 	<set name="BUILD_DIR" value="bin" />
 	<set name="SWF_VERSION" value="10.1" />
 	
