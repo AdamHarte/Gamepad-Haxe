@@ -43,7 +43,7 @@ class Main extends Sprite
 		#if mobile
 		scaleX = scaleY = stage.stageHeight / 400; 
 		#end
-
+		
 		testerContainer = new Sprite();
 		uiContainer = new Sprite();
 		uiContainer.x = 5;
