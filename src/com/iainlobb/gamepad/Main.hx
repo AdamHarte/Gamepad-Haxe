@@ -3,13 +3,12 @@ package com.iainlobb.gamepad;
 import com.iainlobb.gamepadtesters.GamepadTester;
 import com.iainlobb.gamepadtesters.OnScreenJoystickTester;
 import com.iainlobb.gamepadtesters.PlatformGamepadTester;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.Lib;
-import nme.text.TextField;
-import nme.text.TextFormat;
-import nme.text.TextFormatAlign;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
 
 /**
  * ...
@@ -37,8 +36,8 @@ class Main extends Sprite
 	
 	private function init():Void 
 	{
-		stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
-		stage.align = nme.display.StageAlign.TOP_LEFT;
+		stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
+		stage.align = flash.display.StageAlign.TOP_LEFT;
 
 		#if mobile
 		scaleX = scaleY = stage.stageHeight / 400; 
@@ -145,9 +144,9 @@ class Main extends Sprite
 	
 	
 	
-	static public function main() 
-	{
-		Lib.current.addChild(new Main());
-	}
+	//static public function main() 
+	//{
+		//addChild(new Main());
+	//}
 	
 }

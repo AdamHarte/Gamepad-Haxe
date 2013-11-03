@@ -2,12 +2,12 @@ package com.iainlobb.gamepad;
 
 import com.iainlobb.gamepad.Gamepad;
 import com.iainlobb.gamepad.GamepadInput;
-import nme.display.DisplayObject;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.events.TouchEvent;
-import nme.geom.Point;
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
+import flash.geom.Point;
 
 /**
  * ...
@@ -56,10 +56,10 @@ class OnScreenJoystick extends Sprite
 		}
 		
 		addChild(thumb);
-		
-		if (nme.ui.Multitouch.supportsTouchEvents)
+
+		if (flash.ui.Multitouch.supportsTouchEvents)
 		{
-			nme.ui.Multitouch.inputMode = nme.ui.MultitouchInputMode.TOUCH_POINT;
+			flash.ui.Multitouch.inputMode = flash.ui.MultitouchInputMode.TOUCH_POINT;
 			thumb.addEventListener(TouchEvent.TOUCH_BEGIN, thumb_touchBegin);
 		}
 		else thumb.addEventListener(MouseEvent.MOUSE_DOWN, thumb_mouseDown);

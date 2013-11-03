@@ -26,8 +26,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.iainlobb.gamepadtesters;
 
 import com.iainlobb.gamepad.GamepadView;
-import nme.display.Sprite;
-import nme.events.Event;
+import flash.display.Sprite;
+import flash.events.Event;
 
 /**
  * ...

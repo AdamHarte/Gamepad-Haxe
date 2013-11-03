@@ -11,8 +11,9 @@
 	<set name="SWF_VERSION" value="10.1" />
 	
 	<!-- classpath, haxe libs -->
-	<classpath name="src" />
-	<haxelib name="nme" />
+	<source name="src" />
+
+	<haxelib name="openfl" />
 	
 	<!-- assets -->
 	<icon name="assets/nme.svg" />
@@ -22,7 +23,6 @@
 	<ndll name="std" />
 	<ndll name="regexp" />
 	<ndll name="zlib" />
-	<ndll name="nme" haxelib="nme" />
 	
 	<!-- Windows app: hide console -->
 	<!--<setenv name="no_console" value="1" />-->
