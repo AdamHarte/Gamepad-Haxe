@@ -25,10 +25,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 package com.iainlobb.gamepad;
 
-import nme.display.Stage;
-import nme.events.Event;
-import nme.events.KeyboardEvent;
-import nme.ui.Keyboard;
+import flash.display.Stage;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
 
 /**
  * ...

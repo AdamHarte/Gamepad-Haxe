@@ -1,2 +1,7 @@
 bin/*
 .DS_Store
+*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~

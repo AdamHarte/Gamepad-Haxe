@@ -27,10 +27,9 @@ package com.iainlobb.gamepadtesters;
 
 import com.iainlobb.gamepad.Gamepad;
 import com.iainlobb.gamepad.GamepadView;
-import nme.display.MovieClip;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.Lib;
+import flash.display.MovieClip;
+import flash.display.Sprite;
+import flash.events.Event;
 	
 
 /**
